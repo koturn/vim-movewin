@@ -24,8 +24,8 @@ You can use it as follow.
 Sample code:
 
 ~~~~VimL
-nmap <Left>   <Plug><movewin-left>
-nmap <Down>   <Plug><movewin-down>
-nmap <Up>     <Plug><movewin-up>
-nmap <Right>  <Plug><movewin-right>
+nmap <Left>   <Plug>(movewin-left)
+nmap <Down>   <Plug>(movewin-down)
+nmap <Up>     <Plug>(movewin-up)
+nmap <Right>  <Plug>(movewin-right)
 ~~~~
