@@ -8,9 +8,10 @@
 " The original plugin could be used in GUI only. But this forked plugin can be
 " used in Windows-CUI (Command-Prompt) also.
 " }}}
+"=============================================================================
 
 
-function! s:move_win()
+function! s:movewin()
   let l:d1 = 4
   let l:d2 = 16
   let l:t  = &titlestring
@@ -93,4 +94,57 @@ else
 endif
 
 
-command! MoveWin  call s:move_win()
+function! s:movewin_left()
+  let l:x = s:getwinposx()
+  let l:y = s:getwinposy()
+  if l:x == -1 || l:y == -1
+    echoerr 'Can not get window position'
+  else
+    let l:x = l:x - 20
+    exec 'winpos ' . l:x . ' ' . l:y
+  endif
+endfunction
+
+function! s:movewin_down()
+  let l:x = s:getwinposx()
+  let l:y = s:getwinposy()
+  if l:x == -1 || l:y == -1
+    echoerr 'Can not get window position'
+  else
+    let l:y = l:y + 20
+    exec 'winpos ' . l:x . ' ' . l:y
+  endif
+endfunction
+
+function! s:movewin_up()
+  let l:x = s:getwinposx()
+  let l:y = s:getwinposy()
+  if l:x == -1 || l:y == -1
+    echoerr 'Can not get window position'
+  else
+    let l:y = l:y - 20
+    exec 'winpos ' . l:x . ' ' . l:y
+  endif
+endfunction
+
+function! s:movewin_right()
+  let l:x = s:getwinposx()
+  let l:y = s:getwinposy()
+  if l:x == -1 || l:y == -1
+    echoerr 'Can not get window position'
+  else
+    let l:x = l:x + 20
+    exec 'winpos ' . l:x . ' ' . l:y
+  endif
+endfunction
+
+
+command! MoveWin       call s:movewin()
+command! MoveWinLeft   call s:movewin_left()
+command! MoveWinDown   call s:movewin_down()
+command! MoveWinUp     call s:movewin_up()
+command! MoveWinRight  call s:movewin_right()
+nnoremap <silent> <Plug>(movewin-left)   :<C-u>MoveWinLeft<CR>
+nnoremap <silent> <Plug>(movewin-down)   :<C-u>MoveWinDown<CR>
+nnoremap <silent> <Plug>(movewin-up)     :<C-u>MoveWinUp<CR>
+nnoremap <silent> <Plug>(movewin-right)  :<C-u>MoveWinRight<CR>
