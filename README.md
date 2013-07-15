@@ -27,3 +27,32 @@ nmap <Down>   <Plug>(movewin-down)
 nmap <Up>     <Plug>(movewin-up)
 nmap <Right>  <Plug>(movewin-right)
 ~~~~
+
+
+#### Third:
+Separated the codes which should be written to "autoload/" directory from the script in "plugin/" directory.
+
+
+
+
+## Install
+If you use [NeoBundle](https://github.com/Shougo/neobundle.vim "NeoBundle") for a plugin manager,
+write following code in .vimrc.
+
+~~~~VimL
+NeoBundleLazy 'koturn/movewin.vim', {
+      \ 'autoload' : {
+      \   'commands' : 'MoveWin',
+      \   'mappings' : [
+      \     ['n', '<Plug>(movewin-left)'],
+      \     ['n', '<Plug>(movewin-down)'],
+      \     ['n', '<Plug>(movewin-up)'],
+      \     ['n', '<Plug>(movewin-right)']
+      \]}}
+nmap <Left>   <Plug>(movewin-left)
+nmap <Down>   <Plug>(movewin-down)
+nmap <Up>     <Plug>(movewin-up)
+nmap <Right>  <Plug>(movewin-right)
+~~~~
+
+If you use other plugin manager or don't use it, I'm sorry, but please install this plugin on your own.
