@@ -10,6 +10,9 @@
 " }}}
 "=============================================================================
 
+let s:save_cpo = &cpo
+set cpo&vim
+
 
 function! s:movewin()
   let l:d1 = 4
@@ -148,3 +151,7 @@ nnoremap <silent> <Plug>(movewin-left)   :<C-u>MoveWinLeft<CR>
 nnoremap <silent> <Plug>(movewin-down)   :<C-u>MoveWinDown<CR>
 nnoremap <silent> <Plug>(movewin-up)     :<C-u>MoveWinUp<CR>
 nnoremap <silent> <Plug>(movewin-right)  :<C-u>MoveWinRight<CR>
+
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
