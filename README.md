@@ -37,22 +37,18 @@ Separated the codes which should be written to "autoload/" directory from the sc
 
 ## Install
 If you use [NeoBundle](https://github.com/Shougo/neobundle.vim "NeoBundle") for a plugin manager,
-write following code in .vimrc.
+write following code in .vimrc and do command :NeoBundleInstall.
 
 ~~~~VimL
 NeoBundleLazy 'koturn/movewin.vim', {
       \ 'autoload' : {
       \   'commands' : 'MoveWin',
       \   'mappings' : [
-      \     ['n', '<Plug>(movewin-left)'],
-      \     ['n', '<Plug>(movewin-down)'],
-      \     ['n', '<Plug>(movewin-up)'],
-      \     ['n', '<Plug>(movewin-right)']
+      \     '<Plug>(movewin-left)',
+      \     '<Plug>(movewin-down)',
+      \     '<Plug>(movewin-up)',
+      \     '<Plug>(movewin-right)'
       \]}}
-nmap <Left>   <Plug>(movewin-left)
-nmap <Down>   <Plug>(movewin-down)
-nmap <Up>     <Plug>(movewin-up)
-nmap <Right>  <Plug>(movewin-right)
 ~~~~
 
 If you use other plugin manager or don't use it, I'm sorry, but please install this plugin on your own.

@@ -1,7 +1,7 @@
 "=============================================================================
 " FILE: movewin.vim
 " AUTHOR: koturn <jeak.koutan.apple@gmail.com>
-" Last Modified: 16 July 2013.
+" Last Modified: 17 July 2013.
 " DESCRIPTION: {{{
 " This Vim plugin was forked from
 "   http://www.vim.org/scripts/script.php?script_id=741
@@ -14,44 +14,44 @@ set cpo&vim
 
 
 function! movewin#movewin()
-  let l:d1 = 4
-  let l:d2 = 16
-  let l:t  = &titlestring
-  let l:x  = s:getwinposx()
-  let l:y  = s:getwinposy()
-  let l:k  = 'k'
+  let l:d1  = 4
+  let l:d2  = 16
+  let l:x   = s:getwinposx()
+  let l:y   = s:getwinposy()
+  let l:key = 'k'
+  let l:title = &titlestring
 
   if l:x == -1 || l:y == -1
     echoerr 'Can not get window position'
   else
-    while stridx('hjklHJKL', l:k) >= 0
+    while stridx('hjklHJKL', l:key) >= 0
       let &titlestring = 'Moving window: (' . l:x . ', ' . l:y . ')'
       if &lazyredraw
         redraw
       endif
 
-      let l:k = nr2char(getchar())
-      if l:k ==? 'h'
+      let l:key = nr2char(getchar())
+      if l:key ==? 'h'
         let l:x = l:x - l:d1
-        if l:k ==# 'h'
+        if l:key ==# 'H'
           let l:x = l:x - l:d2
         endif
       endif
-      if l:k ==? 'j'
+      if l:key ==? 'j'
         let l:y = l:y + l:d1
-        if l:k ==# 'j'
+        if l:key ==# 'J'
           let l:y = l:y + l:d2
         endif
       endif
-      if l:k ==? 'k'
+      if l:key ==? 'k'
         let l:y = l:y - l:d1
-        if l:k ==# 'k'
+        if l:key ==# 'K'
           let l:y = l:y - l:d2
         endif
       endif
-      if l:k ==? 'l'
+      if l:key ==? 'l'
         let l:x = l:x + l:d1
-        if l:k ==# 'l'
+        if l:key ==# 'L'
           let l:x = l:x + l:d2
         endif
       endif
@@ -59,7 +59,7 @@ function! movewin#movewin()
     endwhile
   endif
 
-  let &titlestring = l:t
+  let &titlestring = l:title
 endfunction
 
 
@@ -73,8 +73,8 @@ function! s:get_winpos_str()
 endfunction
 
 
-if !has('gui_running') || has('win95')
-      \ || has('win16') || has('win32') || has('win64')
+if (has('win95') || has('win16') || has('win32') || has('win64'))
+      \ && !has('gui_running')
   function! s:getwinposx()
     let s:pos_list = s:get_winpos_str()
     return str2nr(s:pos_list[0])
@@ -96,46 +96,24 @@ else
 endif
 
 
-function! movewin#movewin_left()
+function! movewin#movewin_x(dist)
   let l:x = s:getwinposx()
   let l:y = s:getwinposy()
   if l:x == -1 || l:y == -1
     echoerr 'Can not get window position'
   else
-    let l:x = l:x - 20
+    let l:x = l:x + a:dist
     exec 'winpos ' . l:x . ' ' . l:y
   endif
 endfunction
 
-function! movewin#movewin_down()
+function! movewin#movewin_y(dist)
   let l:x = s:getwinposx()
   let l:y = s:getwinposy()
   if l:x == -1 || l:y == -1
     echoerr 'Can not get window position'
   else
-    let l:y = l:y + 20
-    exec 'winpos ' . l:x . ' ' . l:y
-  endif
-endfunction
-
-function! movewin#movewin_up()
-  let l:x = s:getwinposx()
-  let l:y = s:getwinposy()
-  if l:x == -1 || l:y == -1
-    echoerr 'Can not get window position'
-  else
-    let l:y = l:y - 20
-    exec 'winpos ' . l:x . ' ' . l:y
-  endif
-endfunction
-
-function! movewin#movewin_right()
-  let l:x = s:getwinposx()
-  let l:y = s:getwinposy()
-  if l:x == -1 || l:y == -1
-    echoerr 'Can not get window position'
-  else
-    let l:x = l:x + 20
+    let l:y = l:y + a:dist
     exec 'winpos ' . l:x . ' ' . l:y
   endif
 endfunction
