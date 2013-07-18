@@ -29,6 +29,14 @@ nmap <Right>  <Plug>(movewin-right)
 ~~~~
 
 
+If you want to change the amount of movement, set your favorite values to global variables as follow.
+
+~~~~VimL
+let g:movewin#move_x = 10  " the default value is 20.
+let g:movewin#move_y = 10  " the default value is 20.
+~~~~
+
+
 #### Third:
 Separated the codes which should be written to "autoload/" directory from the script in "plugin/" directory.
 

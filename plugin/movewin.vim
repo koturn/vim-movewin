@@ -9,15 +9,22 @@
 " used in Windows-CUI (Command-Prompt) also.
 " }}}
 "=============================================================================
+if exists('g:loaded_movewin')
+  finish
+endif
+let g:loaded_movewin = 1
 let s:save_cpo = &cpo
 set cpo&vim
 
 
+let g:movewin#move_x = get(g:, 'movewin#move_x', 20)
+let g:movewin#move_y = get(g:, 'movewin#move_y', 20)
+
 command! MoveWin       call movewin#movewin()
-command! MoveWinLeft   call movewin#movewin_x(-20)
-command! MoveWinDown   call movewin#movewin_y(20)
-command! MoveWinUp     call movewin#movewin_y(-20)
-command! MoveWinRight  call movewin#movewin_x(20)
+command! MoveWinLeft   call movewin#movewin_x(-g:movewin#move_x)
+command! MoveWinDown   call movewin#movewin_y( g:movewin#move_y)
+command! MoveWinUp     call movewin#movewin_y(-g:movewin#move_y)
+command! MoveWinRight  call movewin#movewin_x( g:movewin#move_x)
 noremap  <silent> <Plug>(movewin-left)   :<C-u>MoveWinLeft<CR>
 noremap! <silent> <Plug>(movewin-left)   <Esc>:MoveWinLeft<CR>
 noremap  <silent> <Plug>(movewin-down)   :<C-u>MoveWinDown<CR>
