@@ -23,6 +23,7 @@ function! movewin#movewin()
 
   if l:x == -1 || l:y == -1
     echoerr 'Can not get window position'
+    return
   else
     while stridx('hjklHJKL', l:key) >= 0
       let &titlestring = 'Moving window: (' . l:x . ', ' . l:y . ')'
