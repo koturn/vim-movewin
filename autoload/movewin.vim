@@ -37,20 +37,17 @@ function! movewin#movewin()
         if l:key ==# 'H'
           let l:x = l:x - l:d2
         endif
-      endif
-      if l:key ==? 'j'
+      elseif l:key ==? 'j'
         let l:y = l:y + l:d1
         if l:key ==# 'J'
           let l:y = l:y + l:d2
         endif
-      endif
-      if l:key ==? 'k'
+      elseif l:key ==? 'k'
         let l:y = l:y - l:d1
         if l:key ==# 'K'
           let l:y = l:y - l:d2
         endif
-      endif
-      if l:key ==? 'l'
+      elseif l:key ==? 'l'
         let l:x = l:x + l:d1
         if l:key ==# 'L'
           let l:x = l:x + l:d2
