@@ -21,20 +21,20 @@ But this plugin distiguishes hjkl and HJKL when option:ignorecase is set.
 This plugin provides interface for key-bind.  
 You can use it as follow.  
 
-~~~~VimL
+```VimL
 nmap <Left>   <Plug>(movewin-left)
 nmap <Down>   <Plug>(movewin-down)
 nmap <Up>     <Plug>(movewin-up)
 nmap <Right>  <Plug>(movewin-right)
-~~~~
+```
 
 
 If you want to change the amount of movement, set your favorite values to global variables as follow.
 
-~~~~VimL
+```VimL
 let g:movewin#move_x = 10  " the default value is 20.
 let g:movewin#move_y = 10  " the default value is 20.
-~~~~
+```
 
 
 #### Third:
@@ -47,7 +47,7 @@ Separated the codes which should be written to "autoload/" directory from the sc
 If you use [NeoBundle](https://github.com/Shougo/neobundle.vim "NeoBundle") for a plugin manager,
 write following code in .vimrc and do command :NeoBundleInstall.
 
-~~~~VimL
+```VimL
 NeoBundleLazy 'koturn/movewin.vim', {
       \ 'autoload' : {
       \   'commands' : 'MoveWin',
@@ -57,6 +57,6 @@ NeoBundleLazy 'koturn/movewin.vim', {
       \     '<Plug>(movewin-up)',
       \     '<Plug>(movewin-right)'
       \]}}
-~~~~
+```
 
 If you use other plugin manager or don't use it, I'm sorry, but please install this plugin on your own.
