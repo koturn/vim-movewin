@@ -16,8 +16,7 @@ set cpo&vim
 function! movewin#movewin()
   let d1  = 4
   let d2  = 16
-  let x   = s:getwinposx()
-  let y   = s:getwinposy()
+  let [x, y] = s:getwinposxy()
   let key = 'k'
   let title = &titlestring
 
@@ -73,30 +72,23 @@ endfunction
 
 if (has('win95') || has('win16') || has('win32') || has('win64'))
       \ && !has('gui_running')
-  function! s:getwinposx()
-    let s:pos_list = s:get_winpos_str()
-    return str2nr(s:pos_list[0])
-  endfunction
-
-  function! s:getwinposy()
-    let y = str2nr(s:pos_list[1][3 :])
-    unlet s:pos_list
-    return y
+  function! s:getwinposxy()
+    let posstr = ''
+    redir => posstr
+      silent! winpos
+    redir END
+    let xypospair = split(split(substitute(posstr, '[\r\n]', '', 'g'), ':')[1][3 :], ',')
+    return [str2nr(xypospair[0]), str2nr(xypospair[1][3 :])]
   endfunction
 else
-  function! s:getwinposx()
-    return getwinposx()
-  endfunction
-
-  function! s:getwinposy()
-    return getwinposy()
+  function! s:getwinposxy()
+    return [getwinposx(), getwinposy()]
   endfunction
 endif
 
 
 function! movewin#movewin_x(dist)
-  let x = s:getwinposx()
-  let y = s:getwinposy()
+  let [x, y] = s:getwinposxy()
   if x == -1 || y == -1
     echoerr 'Can not get window position'
   else
@@ -106,8 +98,7 @@ function! movewin#movewin_x(dist)
 endfunction
 
 function! movewin#movewin_y(dist)
-  let x = s:getwinposx()
-  let y = s:getwinposy()
+  let [x, y] = std:getwinposxy()
   if x == -1 || y == -1
     echoerr 'Can not get window position'
   else
