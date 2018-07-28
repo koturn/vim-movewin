@@ -17,18 +17,18 @@ function! movewin#movewin() abort " {{{
   if x == -1 || y == -1
     echoerr 'Can not get window position'
     return
-  else
-    let [old_titlestring, old_lazyredraw] = [&titlestring, &lazyredraw]
-    let &titlestring = 'Moving window: (' . x . ', ' . y . ')'
-    set nolazyredraw
-    let [cmd_dict, key] = [s:build_cmd_dict('x', 'y', 4, 20), nr2char(getchar())]
-    while has_key(cmd_dict, key)
-      execute cmd_dict[key]
-      execute 'winpos' x y
-      let key = nr2char(getchar())
-    endwhile
-    let [&titlestring, &lazyredraw] = [old_titlestring, old_lazyredraw]
   endif
+  let [old_titlestring, &titlestring] = [&titlestring, 'Moving window: (' . x . ', ' . y . ')']
+  redraw
+  let [cmd_dict, key] = [s:build_cmd_dict('x', 'y', 4, 20), nr2char(getchar())]
+  while has_key(cmd_dict, key)
+    let [x, y] = s:getwinposxy()
+    execute cmd_dict[key]
+    execute 'winpos' x y
+    let [&titlestring, key] = ['Moving window: (' . x . ', ' . y . ')', nr2char(getchar())]
+    redraw
+  endwhile
+  let &titlestring = old_titlestring
 endfunction " }}}
 
 function! movewin#movewin_x(dist) abort " {{{
